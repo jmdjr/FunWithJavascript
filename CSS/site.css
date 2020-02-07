@@ -6,6 +6,11 @@
 
 body {
     display: block;
+    margin: 20px;
+}
+
+header {
+    margin-bottom: 20px;
 }
 
 article, aside, details, figcaption, figure,

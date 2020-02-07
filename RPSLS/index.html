@@ -1,0 +1,43 @@
+
+<!doctype html>
+<html>
+    <head>
+        <link href="/CSS/regular.min.css" rel="stylesheet" />
+        <link href="/CSS/solid.min.css" rel="stylesheet" />
+        <link href="/CSS/svg-with-js.min.css" rel="stylesheet" />
+        <link href="/CSS/fontawesome.css" rel="stylesheet" />
+        <link href="/CSS/site.css" rel="stylesheet" />
+        <link href="/RPSLS/rpsls.css" rel="stylesheet" />
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="/RPSLS/rpsls.js" ></script>
+    </head>
+    <body onload="Fun.RPSLS.init()">
+        <header>
+            <h1>Welcome to Rock, Paper, Scissors, Lizard, Spock the Game!</h1>
+            <div>Click any one of the hands below to throw your option. the randomly selected hands will stop and you will see who wins.</div>
+        </header>
+        <div class="game-field" >
+            <div class="score-player">
+                your score
+                <div>#</div>
+            </div>
+            <div class="opponent">
+                <div>Your Opponent's Choice</div>
+                <div class="opponent-hand"></div>
+                <div class="opponent-hand-choice"></div>
+            </div>
+            <div class="score-opponent">
+                opponent score
+                <div>#</div>
+            </div>
+        </div>
+        <div id="rpslsGame">
+            <i class="rpsls-hand-button fa fa-hand-rock"></i>
+            <i class="rpsls-hand-button fa fa-hand-paper"></i>
+            <i class="rpsls-hand-button fa fa-hand-scissors"></i>
+            <i class="rpsls-hand-button fa fa-hand-lizard"></i>
+            <i class="rpsls-hand-button fa fa-hand-spock"></i>
+        </div>
+    </body>
+</html>
