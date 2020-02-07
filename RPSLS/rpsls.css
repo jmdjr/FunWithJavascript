@@ -1,6 +1,41 @@
-
-
-
 .game-field {
+    width:100%;
     display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.white {
+    color:grey;
+}
+.opponent {
+    height: 200px;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.opponent .opponent-hand {
+    margin: 20px;
+    font-size: 64pt;
+}
+
+.opponent, .score-player, .score-opponent {
+    text-align: center;
+}
+
+.score-player, .score-opponent {
+    height: 100px;
+    min-width: 200px;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+.player {
+    width:100%;
+    display: flex;
+    font-size: 32pt;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }

@@ -19,7 +19,7 @@ ul, ol, h1, h2, h3, iframe, video, audio {
     display: block;
 }
 
-html, body, div, nav, ul, ol, p, i {
+html, body, div, nav, ul, ol, p, i, span, h1, h2, h3, h4 {
     box-sizing: border-box;
     font-family: helvetica;
 }
