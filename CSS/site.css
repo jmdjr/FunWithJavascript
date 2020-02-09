@@ -7,19 +7,31 @@
 body {
     display: block;
     margin: 20px;
+    background: #000000;
+    color: white;
 }
 
-header {
-    margin-bottom: 20px;
-}
+header, section {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
 
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section,
-ul, ol, h1, h2, h3, iframe, video, audio {
-    display: block;
+    max-width: 1000px;
+    margin: auto;
+    margin-bottom: 40px;
 }
 
 html, body, div, nav, ul, ol, p, i, span, h1, h2, h3, h4 {
     box-sizing: border-box;
     font-family: helvetica;
+}
+h1, h2, h3, h4 {
+    display:inline;
+}
+
+
+a {
+    color: #ff66cc;
 }

@@ -5,9 +5,11 @@
     align-items: center;
     justify-content: space-between;
 }
+
 .white {
     color:grey;
 }
+
 .opponent {
     height: 200px;
     display:flex;
@@ -38,4 +40,5 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    margin-top: 50px;
 }
