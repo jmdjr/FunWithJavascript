@@ -16,7 +16,8 @@ Fun.RPSLS = {
                 var playerHand = $(this).data("hand");
                 $this.PlacePlayerHand(this);
                 var opponentHand = $this.Op.OpHand().data("hand");
-                $this.RunHand(playerHand, opponentHand);
+                var condition = $this.RunHand(playerHand, opponentHand);
+                $this.Score.ResolveMatch(condition);
             }
         });
     },
@@ -29,8 +30,8 @@ Fun.RPSLS = {
 
     RunHand: function(playerHand, opponentHand) {
         var $this = this;
-        this.ThrowHand(playerHand, opponentHand);
-        this.runningAHand = setTimeout(function() { $this.runningAHand = null; Fun.RPSLS.Op.spinOpponentHand() }, 3000);
+        this.runningAHand = setTimeout(function() { $this.runningAHand = null; Fun.RPSLS.Op.spinOpponentHand(); Fun.RPSLS.Score.ResetMatchCondition(); }, 3000);
+        return this.ThrowHand(playerHand, opponentHand);
     },
 
     Score: {
@@ -41,11 +42,16 @@ Fun.RPSLS = {
         player: function() { return $(".score-player .score-count"); },
         opponent: function() { return $(".score-opponent .score-count"); },
         total: function() { return $(".total-games .score-count"); },
+        condition: function() { return $(".score-outcome"); },
         
-        UpdateScoreboard: function() {
+        UpdateScoreboard: function(condition) {
             this.player().html(this.playerWins);  
             this.opponent().html(this.opponentWins);
             this.total().html(this.totalGames);
+            this.condition().html(condition);
+        },
+        ResetMatchCondition: function () {
+            this.condition().html("Throw!");
         },
         PlayerWin: function() {
             this.playerWins += 1;
@@ -53,11 +59,18 @@ Fun.RPSLS = {
         },
         
         PlayerLose: function() {
-
+            this.opponentWins += 1;
+            this.PlayerTie();
         },
 
         PlayerTie: function() {
             this.totalGames += 1;
+        },
+        ResolveMatch: function(condition) {
+            if(condition == "win") this.PlayerWin();
+            if(condition == "tie") this.PlayerTie();
+            if(condition == "lose") this.PlayerLose();
+            this.UpdateScoreboard(condition);
         }
     },
 

@@ -15,7 +15,7 @@
     <body onload="Fun.RPSLS.init()">
         <header>
             <h1>Welcome to Rock, Paper, Scissors, Lizard, Spock the Game!</h1>
-            <div>Click any one of the hands below to throw your option. the randomly selected hands will stop and you will see who wins.</div>
+            <div>Click any one of the hands below to throw your option. the randomly selected hands will stop and you will see who wins. After a match, you will need to wait for the opponent to be ready to throw another hand.</div>
         </header>
         <section>
         <div class="game-field" >
@@ -30,7 +30,9 @@
                 </div>
                 <h1>Your Opponent's Choice</h1>
                 <div class="opponent-hand"></div>
-                <div class="opponent-hand-choice">Lose</div>
+                <div class="opponent-hand-choice">
+                    <h1 class="score-outcome">Throw!</h1>
+                </div>
             </div>
             <div class="score-opponent">
                 <h2>opponent score</h2>

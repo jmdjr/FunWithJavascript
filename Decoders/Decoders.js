@@ -21,9 +21,9 @@ Fun.Decoders = {
         console.log(this.singleTabula);
     },
     
-    Message: function(){ return $("#message"); },
-    Key: function(){ return $("#key"); },
-    Crypted: function(){ return $("#crypted"); },
+    Message: function() { return $("#message"); },
+    Key: function() { return $("#key"); },
+    Crypted: function() { return $("#crypted"); },
 
     SetState: function(state) {
         this.state = state;
