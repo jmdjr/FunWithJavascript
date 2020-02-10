@@ -7,15 +7,37 @@ Fun.RPSLS = {
         this.FormatMatches();
 
         this.Op.spinOpponentHand();
+        var $this = this;
 
         $(".player-hands").on("click", function() {
-            var playerHand = $(this).data("hand");
-            Fun.RPSLS.Op.ThrowHand();
-            var opHand = Fun.RPSLS.Op.OpHand().data("hand");
-            var result = Fun.RPSLS.ThrowHand(playerHand, opHand);
-            console.log(result);
-            setTimeout(function() { Fun.RPSLS.Op.spinOpponentHand()}, 3000);
+            if($this.runningAHand == null)
+            {
+                $this.Op.ThrowHand();
+                var playerHand = $(this).data("hand");
+                var opponentHand = $this.Op.OpHand().data("hand");
+                $this.RunHand(playerHand, opponentHand);
+            }
         });
+    },
+
+    runningAHand: null,
+
+    RunHand: function(playerHand, opponentHand) {
+        var $this = this;
+        var result = this.ThrowHand(playerHand, opponentHand);
+        this.runningAHand = setTimeout(function() { $this.runningAHand = null; Fun.RPSLS.Op.spinOpponentHand() }, 3000);
+    },
+
+    UpdateScoreboard: function(score) {
+    },
+
+    Score: {
+        playerWins: 0,
+        opponentWins: 0,
+        totalGames: 0,
+
+        player: function() { return $(".score-player"); },
+        opponent: function() { return $(".score-opponent"); }
     },
 
     Matches: [
@@ -86,14 +108,18 @@ Fun.RPSLS = {
 
         spinOpponentHand: function() {
             var $this = this;
-            this.opponentHandsHandle = setInterval(function() {
-                $this.OpHandSpace().html($this.playIdle());
-            }, 500);
+            if(this.opponentHandsHandle == null)
+            {
+                this.opponentHandsHandle = setInterval(function() {
+                    $this.OpHandSpace().html($this.playIdle());
+                }, 500);
+            }
         },
 
         ThrowHand: function() {
             var $this = this;
             clearInterval(this.opponentHandsHandle);
+            this.opponentHandsHandle = null;
             this.OpHandSpace().html($this.randomHand());
         }
     },

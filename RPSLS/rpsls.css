@@ -17,9 +17,14 @@
     align-items: center;
 }
 
-.opponent .opponent-hand {
+.opponent .opponent-hand, .player .player-hand {
     margin: 20px;
     font-size: 64pt;
+    height: 100px;
+    width: 100px;
+}
+.opponent-hand-choice{
+    height: 14px;
 }
 
 .opponent, .score-player, .score-opponent {
@@ -37,7 +42,7 @@
     width:100%;
     display: flex;
     font-size: 32pt;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     margin-top: 50px;
