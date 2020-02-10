@@ -5,7 +5,7 @@ Fun.RPSLS = {
     init: function() {
 
         this.FormatMatches();
-
+        this.Score.UpdateScoreboard();
         this.Op.spinOpponentHand();
         var $this = this;
 
@@ -14,6 +14,7 @@ Fun.RPSLS = {
             {
                 $this.Op.ThrowHand();
                 var playerHand = $(this).data("hand");
+                $this.PlacePlayerHand(this);
                 var opponentHand = $this.Op.OpHand().data("hand");
                 $this.RunHand(playerHand, opponentHand);
             }
@@ -21,14 +22,15 @@ Fun.RPSLS = {
     },
 
     runningAHand: null,
+    
+    PlacePlayerHand: function(context) {
+        $(".player-hand").html(context.outerHTML);
+    },
 
     RunHand: function(playerHand, opponentHand) {
         var $this = this;
-        var result = this.ThrowHand(playerHand, opponentHand);
+        this.ThrowHand(playerHand, opponentHand);
         this.runningAHand = setTimeout(function() { $this.runningAHand = null; Fun.RPSLS.Op.spinOpponentHand() }, 3000);
-    },
-
-    UpdateScoreboard: function(score) {
     },
 
     Score: {
@@ -36,8 +38,27 @@ Fun.RPSLS = {
         opponentWins: 0,
         totalGames: 0,
 
-        player: function() { return $(".score-player"); },
-        opponent: function() { return $(".score-opponent"); }
+        player: function() { return $(".score-player .score-count"); },
+        opponent: function() { return $(".score-opponent .score-count"); },
+        total: function() { return $(".total-games .score-count"); },
+        
+        UpdateScoreboard: function() {
+            this.player().html(this.playerWins);  
+            this.opponent().html(this.opponentWins);
+            this.total().html(this.totalGames);
+        },
+        PlayerWin: function() {
+            this.playerWins += 1;
+            this.PlayerTie();
+        },
+        
+        PlayerLose: function() {
+
+        },
+
+        PlayerTie: function() {
+            this.totalGames += 1;
+        }
     },
 
     Matches: [
