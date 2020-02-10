@@ -34,7 +34,6 @@ Fun.Decoders = {
         var length = message.length;
 
         if(key == "") {
-            context.attr("id");
             this.Crypted().val("No Key found...");
             return;
         }},
@@ -42,8 +41,37 @@ Fun.Decoders = {
     Encode: function(context) {
         if(this.state == "encode")
         {
-            var props = this.PrepContext(context);
             var message = context.value.toLowerCase();
+            var key = this.Key().val().toLowerCase();
+            var length = message.length;
+
+            if(key == "") {
+                this.Crypted().val("No Key found...");
+                return;
+            }
+            
+            var encode = "";
+            var cypherIndex = 0;
+            for(var i = 0; i < message.length; i +=1)
+            {
+                var char = message[i];
+                var first = this.singleTabula[char];
+
+                if(typeof(first)  == "undefined")
+                {
+                    encode += char;
+                    continue;
+                }
+
+                var keypart = this.singleTabula[key[cypherIndex % key.length]];
+                var map = first + keypart;
+                map = map > 26 ? map - 26 : map;
+                
+                cypherIndex +=1;
+                encode += this.singleTabula[map];
+            }
+
+            this.Crypted().val(encode);
         }
     },
 
@@ -55,7 +83,7 @@ Fun.Decoders = {
             var length = message.length;
 
             if(key == "") {
-                this.Crypted().val("No Key found...");
+                this.Message().val("No Key found...");
                 return;
             }
 
