@@ -1,6 +1,9 @@
 html {
     min-width: 574px;
 }
+header, section {
+    margin-bottom: 20px;
+}
 
 .game-field {
     width:100%;
@@ -15,25 +18,35 @@ html {
 }
 
 .opponent {
-    height: 200px;
+    height: 320px;
     display:flex;
     flex-direction: column;
     align-items: center;
 }
+.opponent .opponent-hand {
+    margin-top: 30px;
+}
 
-.opponent .opponent-hand, .player .player-hand {
-    margin: 20px;
-    font-size: 64pt;
-    height: 100px;
+.opponent .opponent-hand, .player .player-hand .player-hands{
+    font-size: 120pt;
+    line-height: 120pt;
 }
 .opponent-hand-choice{
-    height: 14px;
+    height: 80pt;
+    display: flex;
+    align-items: center;
 }
 
 .opponent, .score-player, .score-opponent {
     text-align: center;
 }
 
+.player-hands:not(:last-of-type) {
+    margin-right: 30pt;
+}
+.player-hand {
+    height: 180pt;
+}
 .score-player, .score-opponent {
     height: 100px;
     min-width: 200px;
@@ -48,5 +61,10 @@ html {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 50px;
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+.score-outcome {
+    font-size: 40pt;
 }
