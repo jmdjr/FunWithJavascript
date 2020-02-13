@@ -73,7 +73,7 @@ Fun.Decoders = {
     },
 
     SetCryption: function(options) {
-
+        $("#selectOrder").val($(options).val());
     },
     
     Decode: function (context) {
