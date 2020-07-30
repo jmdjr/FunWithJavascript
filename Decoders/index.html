@@ -28,16 +28,11 @@
         </div>
     </section>
     <section>
-        <!-- <ol multiple onclick="Fun.Decoders.SetCryption(this)">
-            <li value="Veigner"> Veigner </option>
-                <option value="Ceasar"> Ceasar </option>
-                </select> -->
-        <div id="CypherCollection" class="cypher-collection">
+        <div id="CypherCollection" class="cypher-collection" onchange="Fun.Decoders.SetCryption(this)">
             <input type="checkbox" name="cypher" value="Veigner">Veigner</input>
             <input type="checkbox" name="cypher" value="Ceasar">Ceasar</input>
         </div>
-        <ol class="selected-cyphers-order">
-            no items in list.
+        <ol class="selected-cyphers-order" ondrag="">
         </ol>
         <br />
         <h4>Cypher Order</h3>
@@ -46,12 +41,10 @@
             <h3>Encoded Message</h3>
             the encrypted version goes here.
             <textarea id="crypted" title="Crypted" rows="8" cols="100" type="text"
-                onfocus="Fun.Decoders.SetState('decode')" onchange="Fun.Decoders.Decode(this)">
-            </textarea>
+                onfocus="Fun.Decoders.SetState('decode')" onchange="Fun.Decoders.Decode(this)"></textarea>
             <br />
             <h3>Key</h3>
-            <input id="key" type="text" onfocus="Fun.Decoders.SetState('key')"
-                onchange="Fun.Decoders.UpdateKey(this)" />
+            <input id="key" type="text" onchange="Fun.Decoders.UpdateKey(this)" />
             <br />
             <h3>Decoded Message</h3>
             the plain english version goes here.
