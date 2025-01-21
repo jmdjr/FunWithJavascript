@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Type } from '@angular/core';
+import ComponentList, { ComponentListItem } from "./JSComponents/JsComponents.data"
+import { DESCRIPTION } from '../../../assets/site.data';
 
 @Component({
   selector: 'app-Load',
@@ -6,10 +8,29 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./Load.component.css']
 })
 export class LoadComponent implements OnInit {
+  componentList: ComponentListItem[] = ComponentList;
+  selectedCardItemInputs: any;
+  selectedCardItem: ComponentListItem = null;
+  description: string = DESCRIPTION;
 
-  constructor() { }
-
-  ngOnInit() {
+  get isCardSelected(): boolean {
+    return !!this.selectedCardItem;
   }
 
+  get selectedCardItemComponent() {
+    return this.selectedCardItem?.component;
+  }
+
+  ngOnInit() {
+
+  }
+
+  cardSelected(listItem) {
+    // set the card item for the next list
+    this.selectedCardItem = listItem;
+  }
+
+  unselectCard() {
+    this.selectedCardItem = null;
+  }
 }

@@ -3,9 +3,12 @@ var Fun = Fun || {}
 Fun.Decoders = {
     state: "",
     singleTabula: "abcdefghijklmnopqrstuvwxyz",
+    cryption: 'Veigner',
+
     init: function () {
         this.state = "";
         this.singleTabula = [...this.singleTabula];
+        this.cryption = 'Veigner';
 
         var i = 0;
         var length = this.singleTabula.length;
@@ -14,8 +17,6 @@ Fun.Decoders = {
             var letter = this.singleTabula[i];
             this.singleTabula[letter] = i;
         }
-
-        console.log(this.singleTabula);
     },
 
     Message: function () { return $("#message"); },
@@ -34,25 +35,26 @@ Fun.Decoders = {
                 this.Crypted().val("No Key found...");
                 return;
             }
-            var encode = this.Cryption.Veigner.Encode(this.Message().val(), key);
+            var encode = this.Cryption[this.cryption].Encode(this.Message().val(), key);
             this.Crypted().val(encode);
         }
     },
 
-    SetCryption: function(options) {
+    SetCryption: function (options) {
+        this.cryption = options;
         debugger;
     },
-    
+
     Decode: function () {
         if (this.state == "decode") {
             var key = this.Key().val();
-            
+
             if (key == "") {
                 this.Message().val("No Key found...");
                 return;
             }
 
-            var decode = this.Cryption.Veigner.Decode(this.Crypted().val(), key);
+            var decode = this.Cryption[this.cryption].Decode(this.Crypted().val(), key);
             this.Message().val(decode);
         }
     },
@@ -65,58 +67,58 @@ Fun.Decoders = {
         Veigner: {
             Encode: function (message, key) {
 
-                    var length = message.length;
-                    var encode = "";
-                    var cypherIndex = 0;
+                var length = message.length;
+                var encode = "";
+                var cypherIndex = 0;
 
-                    for (var i = 0; i < length; i += 1) {
-                        var char = message[i];
-                        var first = Fun.Decoders.singleTabula[char];
+                for (var i = 0; i < length; i += 1) {
+                    var char = message[i];
+                    var first = Fun.Decoders.singleTabula[char];
 
-                        if (typeof (first) == "undefined") {
-                            encode += char;
-                            continue;
-                        }
-
-                        var keypart = Fun.Decoders.singleTabula[key[cypherIndex % key.length]];
-                        var map = first + keypart;
-                        map = map > 26 ? map - 26 : map;
-
-                        cypherIndex += 1;
-                        encode += Fun.Decoders.singleTabula[map];
+                    if (typeof (first) == "undefined") {
+                        encode += char;
+                        continue;
                     }
 
-                    return encode;
+                    var keypart = Fun.Decoders.singleTabula[key[cypherIndex % key.length]];
+                    var map = first + keypart;
+                    map = map > 26 ? map - 26 : map;
+
+                    cypherIndex += 1;
+                    encode += Fun.Decoders.singleTabula[map];
+                }
+
+                return encode;
             },
 
             Decode: function (message, key) {
 
-                    var length = message.length;
-                    var decode = "";
-                    var cypherIndex = 0;
+                var length = message.length;
+                var decode = "";
+                var cypherIndex = 0;
 
-                    for (var i = 0; i < length; i += 1) {
-                        var char = message[i];
-                        var first = Fun.Decoders.singleTabula[char];
+                for (var i = 0; i < length; i += 1) {
+                    var char = message[i];
+                    var first = Fun.Decoders.singleTabula[char];
 
-                        if (typeof (first) == "undefined") {
-                            decode += char;
-                            continue;
-                        }
-
-                        var keypart = Fun.Decoders.singleTabula[key[cypherIndex % key.length]];
-                        var map = first - keypart;
-                        map = map < 0 ? map + 26 : map;
-
-                        cypherIndex += 1;
-                        decode += Fun.Decoders.singleTabula[map];
+                    if (typeof (first) == "undefined") {
+                        decode += char;
+                        continue;
                     }
 
-                    return decode;
+                    var keypart = Fun.Decoders.singleTabula[key[cypherIndex % key.length]];
+                    var map = first - keypart;
+                    map = map < 0 ? map + 26 : map;
+
+                    cypherIndex += 1;
+                    decode += Fun.Decoders.singleTabula[map];
+                }
+
+                return decode;
             },
         },
         Ceasar: {
-            Encode: function(message, key) {
+            Encode: function (message, key) {
 
                 var length = message.length;
                 var encode = "";
@@ -129,7 +131,7 @@ Fun.Decoders = {
                         encode += char;
                         continue;
                     }
-                    
+
                     charcode = (charcode + key) % 26;
                     encode += Fun.Decoders.singleTabula[charcode];
                 }
@@ -137,7 +139,7 @@ Fun.Decoders = {
                 return encode;
             },
 
-            Decode: function(message, key) {
+            Decode: function (message, key) {
 
             }
         }

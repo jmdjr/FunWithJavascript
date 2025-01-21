@@ -6,17 +6,8 @@ import Fun from './Decoders';
   templateUrl: './Decoders.component.html',
   styleUrls: ['./Decoders.component.css']
 })
-export class DecodersComponent implements OnInit, AfterViewInit {
-
+export class DecodersComponent implements OnInit {
   fun = Fun;
-
-  @ViewChild("key") Key;
-
-  constructor() { }
-
-  ngAfterViewInit(): void {
-    this.Key;
-  }
 
   ngOnInit() {
     this.init();

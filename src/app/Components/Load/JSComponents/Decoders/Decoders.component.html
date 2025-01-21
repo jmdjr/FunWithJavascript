@@ -1,38 +1,41 @@
-<div (load)="init()">
-  <header>
-    <h1>Decoders</h1>
-    <div>Main Goal of this stuff is to make some primitive cypher decoders</div>
-  </header>
-  <section>
-    <div style="text-align: center;">
-      This will be a Veigner cypher. there are a few ways to do this one and I will do it the way I was taught.
-      <br />
-      Type your message in either the "Encoded Message" or the "Decoded Message" boxes and, as long as you have a
-      key, there will be a message written into the opposite
-      box.
-    </div>
-  </section>
-  <section>
-    <h4>Cypher</h4>
-    <div #CypherCollection class="cypher-collection" (change)="setCryption(this)">
-      <input type="radio" name="cypher" value="Veigner">Veigner
-      <input type="radio" name="cypher" value="Ceasar" />Ceasars
-    </div>
-    <ol class="selected-cyphers-order">
-    </ol>
+
+<div (load)="init()"><header>
+  <h1>Decoders</h1>
+  <div>Main Goal of this stuff is to make some primitive cypher decoders</div>
+</header>
+<section>
+  <div style="text-align: center;">
+    This will be a Veigner cypher. there are a few ways to do this one and I will do it the way I was taught.
     <br />
-    <h4>Cypher Order</h4>
-    <h3>Encoded Message</h3>
-    <div>the encrypted version goes here.</div>
-    <textarea #crypted id="crypted" title="Crypted" rows="8" cols="100" type="text" (focus)="setState('decode')"
-      (change)="decode()"></textarea>
-    <br />
+    Type your message in either the "Encoded Message" or the "Decoded Message" boxes and, as long as you have a
+    key, there will be a message written into the opposite
+    box.
+  </div>
+</section>
+<section>
+  <h4>Cypher</h4>
+  <div #CypherCollection class="cypher-collection">
+    <input type="radio" name="cypher" value="Veigner" (change)="setCryption('Veigner')"/>Veigner
+    <input type="radio" name="cypher" value="Ceasar" (change)="setCryption('Ceasar')"/>Ceasars
+  </div>
+  <ol class="selected-cyphers-order">
+  </ol>
+  <br />
+  <h4>Cypher Order</h4><h3>Key</h3>
+  <input id="key"
+         type="text"
+         (change)="updateKey(this)" />
     <br />
     <h3>Decoded Message</h3>
     <div>the plain english version goes here.</div>
-    <textarea #message id="message" title="Message" rows="8" cols="100" type="text" (focus)="setState('encode')"
+    <textarea #message id="message" class="message-area" title="Message" type="text" placeholder="type/paste message here" (focus)="setState('encode')"
       (change)="encode()"></textarea>
 
+    <h3>Encoded Message</h3>
+    <div>the encrypted version goes here.</div>
+    <textarea #crypted id="crypted" class="message-area" title="Crypted" type="text" placeholder="type/paste encoded message here" (focus)="setState('decode')"
+    (change)="decode()"></textarea>
+    <br />
 
-  </section>
+</section>
 </div>

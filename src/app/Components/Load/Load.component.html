@@ -1,3 +1,24 @@
-<app-Decoders></app-Decoders>
+<section class="card-unselected"
+         *ngIf="!isCardSelected">
 
+  <p [innerHTML]="description"></p>
 
+  <div class="card-list">
+    <ng-container *ngFor="let item of componentList">
+
+      <div class="card"
+           (click)="cardSelected(item)">
+        <h3 [innerHTML]="item.name"></h3>
+      </div>
+    </ng-container>
+  </div>
+</section>
+
+<section class="card-selected"
+         *ngIf="isCardSelected">
+
+  <div class="card return" (click)="unselectCard()">Return</div>
+  <ng-container *ngComponentOutlet="
+    selectedCardItemComponent;
+    inputs: selectedCardItemInputs"></ng-container>
+</section>
