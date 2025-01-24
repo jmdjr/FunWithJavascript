@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import Fun from "./old/rpsls"
+import Fun from "./rpsls"
 
 @Component({
   selector: 'app-rpsls',
