@@ -1,0 +1,182 @@
+@import url("CSS/regular.min.css");
+@import url("CSS/solid.min.css");
+@import url("CSS/svg-with-js.min.css");
+@import url("CSS/fontawesome.css");
+@import url("CSS/site.css");
+@import url("CSS/rpsls.css");
+
+html {
+  min-width: 574px;
+}
+
+header,
+section {
+  margin-bottom: 20px;
+}
+
+.game-field {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@media screen and (max-width: 768px) {
+  .game-field {
+    flex-direction: column;
+  }
+}
+
+.white {
+  color: grey;
+}
+
+.opponent {
+  height: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.opponent .opponent-hand {
+  margin-top: 30px;
+}
+
+.opponent .opponent-hand,
+.player .player-hand .player-hands {
+  font-size: 120pt;
+  line-height: 120pt;
+}
+
+.opponent-hand-choice {
+  height: 80pt;
+  display: flex;
+  align-items: center;
+}
+
+.opponent,
+.score-player,
+.score-opponent {
+  text-align: center;
+}
+
+.player-hands:not(:last-of-type) {
+  margin-right: 30pt;
+}
+
+.player-hand {
+  height: 180pt;
+}
+
+.score-player,
+.score-opponent {
+  height: 100px;
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.player {
+  width: 100%;
+  display: flex;
+  font-size: 32pt;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 50px;
+}
+
+.player-hand-choices {
+  background: #222;
+  border-radius: 5px;
+  border: solid 1px white;
+}
+
+.score-outcome {
+  font-size: 40pt;
+}
+
+.win-diagram-box {
+  height: 175px;
+  width: 175px;
+  border: 1px solid white;
+  background-color: black;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.win-diagram {
+  height: 165px;
+  width: 165px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@pentagonAngle: 72deg;
+@translateY: 2.5em;
+@translateX: 0;
+@translateX1: -1.4em;
+@angle1: 0.5 * @pentagonAngle;
+@flipAngle: 180deg;
+@angle2: 72deg;
+@translateX2: -2em;
+
+@selectors: rock, scissors, paper, lizard, spock;
+
+each(@selectors, {
+  .dia-@{value} {
+    position: absolute;
+    font-size: 1em;
+    height: 1em;
+    width: 1em;
+
+    @rotate1: (2 * @index + 1) * @angle1;
+    @rotate2: (@index + 1) * @angle2;
+    @angle: @index * @pentagonAngle;
+    transform: rotate(@angle) translate(@translateX, @translateY) rotate(-1 * @angle);
+
+    &>i:nth-child(1) {
+      transform: rotate(@rotate1) translateX(@translateX1) rotate(@flipAngle);
+    }
+
+    &>i:nth-child(2) {
+      transform: rotate(@rotate2) translateX(@translateX2);
+    }
+
+    & > i::after {
+      content: '\f30b';
+      color: green;
+      line-height: 0.60em;
+    }
+
+    & > i::before {
+      content: '\f30a';
+      color: red;
+    }
+  }
+});
+
+
+.rock-scissors,
+.rock-paper,
+.scissors-lizard,
+.scissors-paper,
+.paper-lizard,
+.paper-spock,
+.lizard-spock,
+.lizard-rock,
+.spock-rock,
+.spock-scissors {
+  display: grid;
+  position: absolute;
+  line-height: 0.20em;
+  transform-origin: center;
+  top: 0px;
+  left: 0px;
+}

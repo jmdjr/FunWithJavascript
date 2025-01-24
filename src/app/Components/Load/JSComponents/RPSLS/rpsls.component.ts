@@ -5,7 +5,7 @@ import Fun from "./old/rpsls"
 @Component({
   selector: 'app-rpsls',
   templateUrl: './rpsls.component.html',
-  styleUrls: ['./rpsls.component.css']
+  styleUrls: ['./rpsls.component.less']
 })
 export class RpslsComponent implements OnInit {
 
@@ -14,6 +14,6 @@ export class RpslsComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.fun.RPSLS.init();
   }
-
 }

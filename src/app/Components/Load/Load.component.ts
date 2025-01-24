@@ -10,7 +10,7 @@ import { DESCRIPTION } from '../../../assets/site.data';
 export class LoadComponent implements OnInit {
   componentList: ComponentListItem[] = ComponentList;
   selectedCardItemInputs: any;
-  selectedCardItem: ComponentListItem = null;
+  selectedCardItem: ComponentListItem = ComponentList[1];
   description: string = DESCRIPTION;
 
   get isCardSelected(): boolean {
