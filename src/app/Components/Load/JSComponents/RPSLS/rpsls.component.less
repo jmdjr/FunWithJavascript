@@ -33,7 +33,6 @@ section {
 }
 
 .opponent {
-  height: 320px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -50,7 +49,6 @@ section {
 }
 
 .opponent-hand-choice {
-  height: 80pt;
   display: flex;
   align-items: center;
 }
@@ -66,7 +64,7 @@ section {
 }
 
 .player-hand {
-  height: 180pt;
+  font-size: 120pt;
 }
 
 .score-player,
@@ -93,6 +91,7 @@ section {
   background: #222;
   border-radius: 5px;
   border: solid 1px white;
+  padding: 10px;
 }
 
 .score-outcome {
@@ -100,8 +99,8 @@ section {
 }
 
 .win-diagram-box {
-  height: 175px;
-  width: 175px;
+  height: 210px;
+  width: 210px;
   border: 1px solid white;
   background-color: black;
   margin: auto;
@@ -111,35 +110,50 @@ section {
 }
 
 .win-diagram {
-  height: 165px;
-  width: 165px;
+  height: 200px;
+  width: 200px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-@pentagonAngle: 72deg;
-@translateY: 2.5em;
-@translateX: 0;
-@translateX1: -1.4em;
-@angle1: 0.5 * @pentagonAngle;
-@flipAngle: 180deg;
-@angle2: 72deg;
-@translateX2: -2em;
+.win-diagram > i {
+  position: absolute;
+  font-size: 1em;
+  height: 1em;
+  width: 1em;
+}
 
-@selectors: rock, scissors, paper, lizard, spock;
+@pentagonAngle: 72deg;
+@translateY: 1.75em;
+
+@flipAngle: 180deg;
+
+@angle1: 36deg;
+@angle2: 72deg;
+
+@translateX1: -1em;
+@translateX2: -2em;
+// @translateX1: 0em;
+// @translateX2: 0em;
+
+@selectors: scissors, paper, rock, lizard, spock;
 
 each(@selectors, {
   .dia-@{value} {
-    position: absolute;
-    font-size: 1em;
-    height: 1em;
-    width: 1em;
+    @idx: @index - 1;
+    @rotate1: (2 * @idx + 1) * @angle1;
+    @rotate2: (@idx + 1) * @angle2;
+    @angle: @idx * @pentagonAngle;transform: rotate(@angle) translateY(@translateY) rotate(-1 * @angle);
 
-    @rotate1: (2 * @index + 1) * @angle1;
-    @rotate2: (@index + 1) * @angle2;
-    @angle: @index * @pentagonAngle;
-    transform: rotate(@angle) translate(@translateX, @translateY) rotate(-1 * @angle);
+    & > i {
+      display: grid;
+      position: absolute;
+      line-height: 0.20em;
+      transform-origin: center;
+      top: 0px;
+      left: 0px;
+    }
 
     &>i:nth-child(1) {
       transform: rotate(@rotate1) translateX(@translateX1) rotate(@flipAngle);
@@ -149,34 +163,21 @@ each(@selectors, {
       transform: rotate(@rotate2) translateX(@translateX2);
     }
 
-    & > i::after {
+    & > i::before {
       content: '\f30b';
       color: green;
-      line-height: 0.60em;
+      visibility: hidden;
     }
 
-    & > i::before {
+    & > i::after {
       content: '\f30a';
       color: red;
+      line-height: 0.60em;
+      visibility: hidden;
+    }
+
+    & > i.show-win::after, & > i.show-lose::before, &>i.show::after,  &>i.show::after {
+      visibility:visible;
     }
   }
 });
-
-
-.rock-scissors,
-.rock-paper,
-.scissors-lizard,
-.scissors-paper,
-.paper-lizard,
-.paper-spock,
-.lizard-spock,
-.lizard-rock,
-.spock-rock,
-.spock-scissors {
-  display: grid;
-  position: absolute;
-  line-height: 0.20em;
-  transform-origin: center;
-  top: 0px;
-  left: 0px;
-}

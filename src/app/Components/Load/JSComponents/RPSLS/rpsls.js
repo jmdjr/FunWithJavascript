@@ -1,7 +1,11 @@
 var Fun = Fun || {}
 
+const HAND = 'hand';
+const SHOW = 'show';
+const toCssClass = v => $(v).prop('class');
 
 Fun.RPSLS = {
+    hand: 'hand',
     init: function () {
 
         this.Op.correctHandTags();
@@ -13,17 +17,27 @@ Fun.RPSLS = {
         $(".player-hands").on("click", function () {
             if ($this.runningAHand == null) {
                 $this.Op.ThrowHand();
-                var playerHand = $(this).data("hand");
+                var playerHand = $(this).data(HAND);
                 $this.PlacePlayerHand(this);
-                var opponentHand = $this.Op.OpHand().data("hand");
+                var opponentHand = $this.Op.OpHand().data(HAND);
                 var condition = $this.RunHand(playerHand, opponentHand);
                 $this.Score.ResolveMatch(condition);
             }
         });
+
+        $('.win-diagram').on('click', (click) => {
+            const winDiagram = $(click.currentTarget);
+            const hand = $(click.target).data(HAND);
+            const diags = winDiagram.find('i');
+            // diags.removeClass('show');
+            // winDiagram.find(`[class*='${hand}']`).addClass('show');
+            diags.removeClass('show-win').removeClass('show-lose');
+            winDiagram.find(`[class*='-${hand}']`).addClass('show-win');
+            winDiagram.find(`[class*='${hand}-']`).addClass('show-lose');
+        });
     },
 
     runningAHand: null,
-
     PlacePlayerHand: function (context) {
         $(".player-hand").html(context.outerHTML);
     },
