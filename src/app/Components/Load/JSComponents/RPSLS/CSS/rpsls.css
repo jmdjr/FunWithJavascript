@@ -18,7 +18,6 @@ header, section {
 }
 
 .opponent {
-    height: 320px;
     display:flex;
     flex-direction: column;
     align-items: center;
@@ -28,11 +27,10 @@ header, section {
 }
 
 .opponent .opponent-hand, .player .player-hand .player-hands{
-    font-size: 120pt;
+    font-size: 100pt;
     line-height: 120pt;
 }
-.opponent-hand-choice{
-    height: 80pt;
+.opponent-hand-choice {
     display: flex;
     align-items: center;
 }
