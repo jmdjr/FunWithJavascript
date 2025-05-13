@@ -1,10 +1,11 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import Fun from './Decoders';
 
 @Component({
   selector: 'app-Decoders',
   templateUrl: './Decoders.component.html',
-  styleUrls: ['./Decoders.component.css']
+  styleUrls: ['./Decoders.component.css'],
+  standalone: false
 })
 export class DecodersComponent implements OnInit {
   fun = Fun;

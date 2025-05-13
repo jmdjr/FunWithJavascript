@@ -26,7 +26,12 @@
             ],
             "styles": [
               "src/styles.css"
-            ]
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/app/Components/Load/JSComponents/RPSLS/CSS"
+              ]
+            }
           },
           "configurations": {
             "production": {

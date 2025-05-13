@@ -188,6 +188,9 @@ Fun.RPSLS = {
             }
         },
 
+        prepOpponentHand: function () {
+        },
+
         ThrowHand: function () {
             var $this = this;
             clearInterval(this.opponentHandsHandle);

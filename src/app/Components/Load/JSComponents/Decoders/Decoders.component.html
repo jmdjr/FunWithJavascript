@@ -15,8 +15,8 @@
 <section>
   <h4>Cypher</h4>
   <div #CypherCollection class="cypher-collection">
-    <input type="radio" name="cypher" value="Veigner" (change)="setCryption('Veigner')"/>Veigner
-    <input type="radio" name="cypher" value="Ceasar" (change)="setCryption('Ceasar')"/>Ceasars
+    <input type="radio" name="cypher" value="Veigner" aria-selected="true" (change)="setCryption('Veigner')"/>Veigner
+    <input type="radio" name="cypher" value="Ceasar" disabled (change)="setCryption('Ceasar')"/>Ceasars
   </div>
   <ol class="selected-cyphers-order">
   </ol>
